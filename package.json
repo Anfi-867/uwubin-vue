@@ -1,11 +1,25 @@
 {
-  "name": "project-name",
+  "name": "uwubin-server",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "author": "ya-sach1 <ikurogane85@gmail.com>",
+  "main": "build/index.js",
+  "author": "ya-sach1 <femboy@sach1.tk>",
   "license": "MIT",
   "scripts": {
-    "start": "tsc && node dist/index.js",
-    "compile": "tsc"
+    "dev": "tsc && node build/App.js",
+    "start": "node build/App.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "log-smth": "^1.1.7",
+    "mongoose": "^5.10.13",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.8",
+    "@types/express": "^4.17.8",
+    "@types/mongoose": "^5.7.37",
+    "@types/node": "^14.14.6",
+    "@types/uuid": "^8.3.0"
   }
 }

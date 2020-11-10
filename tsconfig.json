@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "ES2018",
-        "outDir": "dist",
+        "outDir": "build",
         "sourceMap": false,
         "inlineSourceMap": true,
         "inlineSources": true,
@@ -11,7 +11,8 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "pretty": true,
-        "strict": true
+        "strict": true,
+        "allowJs": true
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules"]
