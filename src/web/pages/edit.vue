@@ -85,20 +85,21 @@ export default {
             }
 
             this.$axios.setHeader('Authorization', this.ownerKey);
-            this.$axios
-                .$post(`http://localhost:6969/api/v1/edit/${this.pasteId}`, {
+            await this.$axios
+                .$put(`http://localhost:6969/api/v1/edit/${this.pasteId}`, {
                     paste: this.text,
                 })
                 .then(d => {
-                    if (!d.success) {
-                        this.setWarnMessage(
-                            "couldn't edit that paste. check the inputted info twice.",
-                            'red',
-                        );
-                        this.showAlert(6e3);
-                    } else {
+                    if (d.success) {
                         document.getElementById('uwu-text').value = 'Edited.';
                     }
+                })
+                .catch(e => {
+                    this.setWarnMessage(
+                        "couldn't edit that paste. check the inputted info twice.",
+                        'red',
+                    );
+                    return this.showAlert(6e3);
                 });
         },
         setWarnMessage: function(message, color, fontSize) {
@@ -115,9 +116,6 @@ export default {
                 alert.style.display = 'none';
             }, time);
         },
-    },
-    mounted() {
-        this.link = 'http://localhost:3000';
     },
 };
 </script>

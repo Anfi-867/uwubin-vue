@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
-    "nuxt": "^2.14.7"
+    "nuxt": "^2.14.7",
+    "nuxt-highlightjs": "^1.0.1"
   }
 }

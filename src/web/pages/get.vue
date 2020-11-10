@@ -11,20 +11,34 @@
                 name="text"
                 rows="auto"
                 class="form-control"
-                placeholder="console.log('Hello World');"
+                placeholder="Paste the id below..."
                 wrap="hard"
                 spellcheck="false"
                 maxlength="100000"
                 id="uwu-text"
             ></textarea>
+            <!-- No syntax highlighting, fuck you. -->
+        </div>
+        <div id="input-box">
+            <div class="form-group">
+                <label class="col-form-label" for="inputDefault"
+                    >Insert your paste id here...</label
+                >
+                <input
+                    type="text"
+                    class="form-control center"
+                    placeholder="Paste ID"
+                    id="pasteid"
+                />
+            </div>
         </div>
         <div class="button-box">
             <button
                 type="button"
                 class="btn btn-outline-primary btn-lg"
-                v-on:click="paste"
+                v-on:click="get"
             >
-                Paste
+                Get
             </button>
         </div>
     </div>
@@ -35,31 +49,36 @@ import '../css/bootstrap.min.css';
 export default {
     data: function() {
         return {
-            link: String,
-            text: String,
+            pasteId: String,
             warnMessage: String,
             pasteData: String,
         };
     },
     methods: {
-        paste: async function() {
-            this.text = document.getElementById('uwu-text').value;
+        get: async function() {
+            this.pasteId = document.getElementById('pasteid').value;
 
-            if (!this.text) {
-                this.setWarnMessage('no input provided.', 'red');
-                this.showAlert(6e3);
-            } else {
-                const data = await this.$axios.$post(
-                    'http://localhost:6969/api/v1/create',
-                    {
-                        paste: this.text,
-                    },
-                );
-
-                document.getElementById(
-                    'uwu-text',
-                ).value = `ID: ${data.id} (http://localhost:3000/${data.id}) :: Owner Key: ${data.ownerKey} (Used to edit, delete and find pastes. )`;
+            if (!this.pasteId) {
+                this.setWarnMessage('no paste id provided.', 'red');
+                return this.showAlert(6e3);
             }
+
+            await this.$axios
+                .$get(`http://localhost:6969/api/v1/get/${this.pasteId}`)
+                .then(d => {
+                    if (d.success) {
+                        document.getElementById('uwu-text').value = d.paste;
+                    } else {
+                        console.log('not success bru');
+                    }
+                })
+                .catch(e => {
+                    this.setWarnMessage(
+                        "couldn't get that paste. check the inputted info twice.",
+                        'red',
+                    );
+                    return this.showAlert(6e3);
+                });
         },
         setWarnMessage: function(message, color, fontSize) {
             document.getElementById('alert-thingie').style.color = color;
@@ -86,6 +105,14 @@ export default {
 
 #box {
     display: flex;
+}
+
+.center {
+    text-align: center;
+}
+
+#input-box {
+    text-align: center;
 }
 
 #alert-thingie {
