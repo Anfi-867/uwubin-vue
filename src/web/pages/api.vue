@@ -17,11 +17,6 @@
                 <p>Param(s): <code>id :: paste id</code></p>
             </div>
             <div id="api">
-                <p>Endpoint: <code>/api/v1/find/:key</code></p>
-                <p>Method(s): <code>GET</code></p>
-                <p>Param(s): <code>key :: owner key</code></p>
-            </div>
-            <div id="api">
                 <p>Endpoint: <code>/api/v1/edit/:id</code></p>
                 <p>Method(s): <code>PUT</code></p>
                 <p>Param(s): <code>id :: paste id</code></p>

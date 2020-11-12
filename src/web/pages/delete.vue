@@ -6,19 +6,6 @@
                 {{ warnMessage }}
             </h1>
         </div>
-        <div class="textarea-box">
-            <textarea
-                name="text"
-                rows="auto"
-                class="form-control"
-                placeholder="Paste the id below..."
-                wrap="hard"
-                spellcheck="false"
-                maxlength="100000"
-                id="uwu-text"
-            ></textarea>
-            <!-- No syntax highlighting, fuck you. -->
-        </div>
         <div id="input-box">
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault"
@@ -30,15 +17,23 @@
                     placeholder="Paste ID"
                     id="pasteid"
                 />
+                <label class="col-form-label" for="inputDefault"
+                    >Insert your owner key here...</label
+                ><input
+                    type="password"
+                    class="form-control center"
+                    placeholder="Owner Key"
+                    id="ownerkey"
+                />
             </div>
         </div>
         <div class="button-box">
             <button
                 type="button"
                 class="btn btn-outline-primary btn-lg"
-                v-on:click="get"
+                v-on:click="deletePaste"
             >
-                Get
+                Delete
             </button>
         </div>
     </div>
@@ -50,29 +45,36 @@ export default {
     data: function() {
         return {
             pasteId: String,
+            ownerKey: String,
             warnMessage: String,
-            pasteData: String,
         };
     },
     methods: {
-        get: async function() {
+        deletePaste: async function() {
             this.pasteId = document.getElementById('pasteid').value;
+            this.ownerKey = document.getElementById('ownerkey').value;
 
             if (!this.pasteId) {
                 this.setWarnMessage('no paste id provided.', 'red');
                 return this.showAlert(6e3);
             }
+            if (!this.ownerKey) {
+                this.setWarnMessage('no owner key provided.', 'red');
+                return this.showAlert(6e3);
+            }
 
+            this.$axios.setHeader('Authorization', this.ownerKey);
             await this.$axios
-                .$get(`http://localhost:6969/api/v1/get/${this.pasteId}`)
+                .$delete(`http://localhost:6969/api/v1/delete/${this.pasteId}`)
                 .then(d => {
                     if (d.success) {
-                        document.getElementById('uwu-text').value = d.paste;
+                        this.setWarnMessage('deleted.', 'green');
+                        return this.showAlert(6e3);
                     }
                 })
                 .catch(e => {
                     this.setWarnMessage(
-                        "couldn't get that paste. check the inputted info twice.",
+                        "couldn't delete that paste. check the inputted info twice.",
                         'red',
                     );
                     return this.showAlert(6e3);
@@ -105,12 +107,9 @@ export default {
     display: flex;
 }
 
-.center {
-    text-align: center;
-}
-
 #input-box {
     text-align: center;
+    height: 50%;
 }
 
 #alert-thingie {
@@ -121,15 +120,5 @@ export default {
 .button-box button {
     display: block;
     width: 100%;
-}
-
-.textarea-box textarea {
-    resize: none;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-top: 3vmin;
-    margin-bottom: 3vmin;
-    height: 70vh;
 }
 </style>

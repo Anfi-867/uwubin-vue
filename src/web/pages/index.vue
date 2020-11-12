@@ -10,7 +10,6 @@
             <router-link to="/get">Get Paste</router-link><br />
             <router-link to="/edit">Edit Paste</router-link><br />
             <router-link to="/delete">Delete Paste</router-link><br />
-            <router-link to="/find">Find Paste</router-link><br />
             <router-link to="/api">API</router-link><br />
         </div>
     </div>

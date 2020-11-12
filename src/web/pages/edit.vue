@@ -56,12 +56,10 @@ import '../css/bootstrap.min.css';
 export default {
     data: function() {
         return {
-            link: String,
             pasteId: String,
             ownerKey: String,
             text: String,
             warnMessage: String,
-            pasteData: String,
         };
     },
     methods: {
@@ -91,7 +89,8 @@ export default {
                 })
                 .then(d => {
                     if (d.success) {
-                        document.getElementById('uwu-text').value = 'Edited.';
+                        this.setWarnMessage('edited.', 'green');
+                        return this.showAlert(6e3);
                     }
                 })
                 .catch(e => {
@@ -127,10 +126,6 @@ export default {
 
 #box {
     display: flex;
-}
-
-.center {
-    text-align: center;
 }
 
 #input-box {

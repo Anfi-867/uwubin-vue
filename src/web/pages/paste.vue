@@ -58,7 +58,7 @@ export default {
 
                 document.getElementById(
                     'uwu-text',
-                ).value = `ID: ${data.id} (http://localhost:3000/${data.id}) :: Owner Key: ${data.ownerKey} (Used to edit, delete and find pastes. )`;
+                ).value = `ID: ${data.id} :: Owner Key: ${data.ownerKey} ( Used to edit, delete and find pastes. )`;
             }
         },
         setWarnMessage: function(message, color, fontSize) {
