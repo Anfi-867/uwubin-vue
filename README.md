@@ -3,7 +3,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -158,5 +157,3 @@ Project Link: [https://github.com/ya-sach1/uwubin-vue](https://github.com/ya-sac
 [issues-url]: https://github.com/ya-sach1/uwubin-vue/issues
 [license-shield]: https://img.shields.io/github/license/ya-sach1/uwubin-vue.svg?style=flat-square
 [license-url]: https://github.com/ya-sach1/uwubin-vue/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/ya-sach1
