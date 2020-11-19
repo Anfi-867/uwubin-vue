@@ -3,5 +3,6 @@ export default {
     axios: {
         // proxy: true
     },
-    buildDir: './build'
+    buildDir: './build',
+    target: 'static'
 };
