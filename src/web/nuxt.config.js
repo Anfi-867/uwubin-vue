@@ -3,4 +3,5 @@ export default {
     axios: {
         // proxy: true
     },
+    buildDir: './build'
 };
